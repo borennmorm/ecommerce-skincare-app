@@ -1,10 +1,11 @@
-import 'package:ecommer_skincare_app/features/auth/presentation/pages/auth_page.dart';
-import 'package:ecommer_skincare_app/features/home/presentation/pages/home_page.dart';
+import 'package:ecommer_skincare_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'features/home/presentation/pages/home_page.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
             .copyWith(secondary: Colors.pinkAccent),
       ),
-      home: AuthPage(),
+      home: const HomePage(),
     );
   }
 }
