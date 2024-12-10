@@ -18,6 +18,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _isObscured = true;
 
+  void register() {
+  if (usernameController.text.isEmpty ||
+      emailController.text.isEmpty ||
+      passwordController.text.isEmpty) {
+    Get.snackbar('Error', 'All fields are required!',
+        snackPosition: SnackPosition.BOTTOM);
+    return;
+  }
+
+  authController.register(
+    usernameController.text,
+    emailController.text,
+    passwordController.text,
+  );
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,13 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 16),
                 // Register Button
                 ElevatedButton(
-                  onPressed: () {
-                    authController.register(
-                      usernameController.text,
-                      emailController.text,
-                      passwordController.text,
-                    );
-                  },
+                  onPressed: register,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink,
                     padding: const EdgeInsets.symmetric(vertical: 16),

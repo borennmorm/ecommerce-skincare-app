@@ -1,27 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../../../home/presentation/pages/home_page.dart';
+import '../pages/login_screen.dart';
+
 class AuthController extends GetxController {
-  var isLoggedIn = false.obs;
-  var username = ''.obs;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void login(String email, String password) {
-    // In a real app, you would validate credentials against a backend
-    // For this example, we'll just set a dummy username and log in
-    username.value = email.split('@')[0];
-    isLoggedIn.value = true;
-    Get.offAllNamed('/');
+  Future<void> register(String username, String email, String password) async {
+    try {
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Optionally, update the display name with the username
+      await userCredential.user?.updateDisplayName(username);
+
+      Get.snackbar("Success", "Account created successfully!",
+          snackPosition: SnackPosition.BOTTOM);
+
+      // Navigate to HomePage or LoginScreen
+      Get.offAll(() => const LoginScreen());
+    } catch (e) {
+      Get.snackbar("Error", e.toString(),
+          snackPosition: SnackPosition.BOTTOM);
+    }
   }
 
-  void register(String username, String email, String password) {
-    // In a real app, you would send registration data to a backend
-    // For this example, we'll just log in the user after registration
-    login(email, password);
-  }
-
-  void logout() {
-    isLoggedIn.value = false;
-    username.value = '';
-    Get.offAllNamed('/auth');
+  Future<void> login(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.snackbar('Success', 'Logged in successfully!',
+          snackPosition: SnackPosition.BOTTOM);
+      Get.offAll(() => const HomePage());
+    } catch (e) {
+      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
+    }
   }
 }
-

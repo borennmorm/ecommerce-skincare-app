@@ -19,6 +19,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isObscured = true;
 
+  void login() {
+  if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+    Get.snackbar('Error', 'Email and Password cannot be empty!',
+        snackPosition: SnackPosition.BOTTOM);
+    return;
+  }
+
+  authController.login(emailController.text, passwordController.text);
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,12 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 // Login Button
                 ElevatedButton(
-                  onPressed: () {
-                    authController.login(
-                      emailController.text,
-                      passwordController.text,
-                    );
-                  },
+                  onPressed: login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink,
                     padding: const EdgeInsets.symmetric(vertical: 16),

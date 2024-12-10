@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "71616844051",
+    "project_id": "e-commerce-24772",
+    "storage_bucket": "e-commerce-24772.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71616844051:android:a167807397b4660da94ae6",
+        "android_client_info": {
+          "package_name": "com.ecommerce.skincare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcDKyfyKO-dly9KKMHR9F71OrteOwO09c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71616844051:android:c6e6cc0abe4f8890a94ae6",
+        "android_client_info": {
+          "package_name": "com.example.ecommer_skincare_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcDKyfyKO-dly9KKMHR9F71OrteOwO09c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
