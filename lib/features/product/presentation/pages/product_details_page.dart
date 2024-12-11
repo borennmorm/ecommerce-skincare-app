@@ -1,4 +1,5 @@
 import 'package:ecommer_skincare_app/features/cart/presentation/controllers/cart_controller.dart';
+import 'package:ecommer_skincare_app/features/favorite/presentation/controllers/favorite_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -12,7 +13,14 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final cartController = Get.put(CartController());
-  int quantity = 1; // Default quantity
+  final favoriteController = Get.find<FavoriteController>();
+  int quantity = 1;
+
+  // Product details (you might want to pass these as parameters)
+  final String productId = 'product-${DateTime.now().millisecondsSinceEpoch}';
+  final String productName = 'Hydrating Serum';
+  final double productPrice = 24.99;
+  final String productImage = 'https://www.sephora.com/productimages/sku/s2743060-main-zoom.jpg?imwidth=1224';
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +38,41 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         iconTheme: const IconThemeData(color: Colors.black),
         titleTextStyle: const TextStyle(
           color: Colors.black,
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
+        actions: [
+          Obx(() => IconButton(
+            icon: Icon(
+              favoriteController.isFavorite(productId)
+                  ? Iconsax.heart5
+                  : Iconsax.heart,
+              color: favoriteController.isFavorite(productId)
+                  ? Colors.pink
+                  : Colors.grey.shade400,
+            ),
+            onPressed: () {
+              favoriteController.toggleFavorite(
+                FavoriteProduct(
+                  id: productId,
+                  name: productName,
+                  price: productPrice,
+                  image: productImage,
+                ),
+              );
+              Get.snackbar(
+                favoriteController.isFavorite(productId)
+                    ? 'Added to Favorites'
+                    : 'Removed from Favorites',
+                favoriteController.isFavorite(productId)
+                    ? '$productName has been added to your favorites'
+                    : '$productName has been removed from your favorites',
+                snackPosition: SnackPosition.TOP,
+                duration: const Duration(seconds: 2),
+              );
+            },
+          )),
+        ],
       ),
       backgroundColor: Colors.grey[100],
 
@@ -151,9 +191,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               child: ElevatedButton(
                 onPressed: () {
                   cartController.addToCart(
-                    'Hydrating Serum',
-                    24.99 * quantity,
-                    'https://www.sephora.com/productimages/sku/s2743060-main-zoom.jpg?imwidth=1224',
+                    productName,
+                    productPrice * quantity,
+                    productImage,
                   );
                   Get.snackbar(
                     'Added to Cart',

@@ -4,6 +4,9 @@ import 'package:iconsax/iconsax.dart';
 import '../../../auth/presentation/pages/login_screen.dart';
 import '../../../auth/presentation/controllers/user_controller.dart';
 import 'edit_profile_page.dart';
+import 'notification_settings_page.dart';
+import 'privacy_policy_page.dart';
+import 'about_page.dart';
 
 class SettingsPage extends StatelessWidget {
   final UserController userController = Get.put(UserController());
@@ -117,9 +120,7 @@ class SettingsPage extends StatelessWidget {
                   _buildSettingItem(
                     icon: Iconsax.notification,
                     title: 'Notifications',
-                    onTap: () {
-                      // Navigate to notifications settings
-                    },
+                    onTap: () => Get.to(() => NotificationSettingsPage()),
                   ),
                   _buildDivider(),
                   _buildSettingItem(
@@ -134,17 +135,13 @@ class SettingsPage extends StatelessWidget {
                   _buildSettingItem(
                     icon: Iconsax.security,
                     title: 'Privacy Policy',
-                    onTap: () {
-                      // Navigate to privacy policy
-                    },
+                    onTap: () => Get.to(() => const PrivacyPolicyPage()),
                   ),
                   _buildDivider(),
                   _buildSettingItem(
                     icon: Iconsax.info_circle,
                     title: 'About',
-                    onTap: () {
-                      _showAboutDialog(context);
-                    },
+                    onTap: () => Get.to(() => const AboutPage()),
                   ),
                 ],
               ),
@@ -232,42 +229,6 @@ class SettingsPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  void _showAboutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('About SkincareCo'),
-        content: const Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'SkincareCo App',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text('Version 1.0.0'),
-            SizedBox(height: 16),
-            Text(
-              'SkincareCo is your one-stop destination for all your skincare needs. '
-              'We provide high-quality skincare products to help you achieve your '
-              'perfect skincare routine.',
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Close'),
-          ),
-        ],
       ),
     );
   }
