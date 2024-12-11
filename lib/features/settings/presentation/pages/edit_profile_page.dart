@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import '../../../auth/presentation/controllers/user_controller.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -14,6 +17,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final UserController userController = Get.find();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  String? _imageUrl;
   bool _isUploading = false;
 
   @override
@@ -21,6 +26,82 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.initState();
     nameController.text = userController.userName.value;
     emailController.text = userController.email.value;
+  }
+
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await _picker.pickImage(
+        source: source,
+        imageQuality: 70, // Compress image
+        maxWidth: 1024,   // Limit max width
+      );
+      
+      if (image != null) {
+        setState(() => _isUploading = true);
+        await _uploadImage(image.path);
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to pick image: $e',
+        snackPosition: SnackPosition.TOP,
+      );
+    } finally {
+      setState(() => _isUploading = false);
+    }
+  }
+
+  Future<void> _uploadImage(String filePath) async {
+    try {
+      final userId = userController.user.value?.uid;
+      if (userId == null) return;
+
+      final file = File(filePath);
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('profile_images')
+          .child('$userId.jpg');
+
+      // Upload file with metadata
+      final uploadTask = storageRef.putFile(
+        file,
+        SettableMetadata(
+          contentType: 'image/jpeg',
+          customMetadata: {
+            'userId': userId,
+            'uploadedAt': DateTime.now().toIso8601String(),
+          },
+        ),
+      );
+
+      // Monitor upload progress
+      uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
+        final progress = snapshot.bytesTransferred / snapshot.totalBytes;
+        print('Upload progress: ${(progress * 100).toStringAsFixed(2)}%');
+      });
+
+      // Wait for upload to complete
+      final snapshot = await uploadTask.whenComplete(() {});
+      final downloadUrl = await snapshot.ref.getDownloadURL();
+
+      setState(() => _imageUrl = downloadUrl);
+
+      Get.snackbar(
+        'Success',
+        'Profile picture uploaded successfully',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to upload image: $e',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 
   void _showImagePickerOptions() {
@@ -47,11 +128,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               title: const Text('Take a Photo'),
               onTap: () {
                 Get.back();
-                Get.snackbar(
-                  'Feature Not Available',
-                  'Image upload feature is coming soon',
-                  snackPosition: SnackPosition.TOP,
-                );
+                _pickImage(ImageSource.camera);
               },
             ),
             ListTile(
@@ -59,11 +136,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               title: const Text('Choose from Gallery'),
               onTap: () {
                 Get.back();
-                Get.snackbar(
-                  'Feature Not Available',
-                  'Image upload feature is coming soon',
-                  snackPosition: SnackPosition.TOP,
-                );
+                _pickImage(ImageSource.gallery);
               },
             ),
           ],
@@ -90,13 +163,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   CircleAvatar(
                     radius: 60,
                     backgroundColor: Colors.grey[200],
+                    backgroundImage: _imageUrl != null ? NetworkImage(_imageUrl!) : null,
                     child: _isUploading
-                        ? const CircularProgressIndicator()
-                        : const Icon(
-                            Iconsax.user,
-                            size: 60,
-                            color: Colors.grey,
-                          ),
+                        ? const CircularProgressIndicator(color: Colors.pink)
+                        : _imageUrl == null
+                            ? const Icon(
+                                Iconsax.user,
+                                size: 60,
+                                color: Colors.grey,
+                              )
+                            : null,
                   ),
                   Positioned(
                     right: 0,

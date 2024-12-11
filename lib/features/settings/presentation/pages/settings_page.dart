@@ -159,16 +159,19 @@ class SettingsPage extends StatelessWidget {
                   _showLogoutDialog(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.grey[100],
+                  
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: Colors.red),
+
                   ),
                 ),
                 child: const Text(
                   'Logout',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.red,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
