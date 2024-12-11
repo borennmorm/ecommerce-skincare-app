@@ -149,36 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    authController.signInWithGoogle();
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.grey[200],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/google.png',
-                          width: 40,
-                          height: 40,
-                        ),
-                        const SizedBox(width: 20),
-                        const Text(
-                          'Sign In With Google',
-                          style: TextStyle(fontSize: 17),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 30), // Spacer replacement
                 TextButton(
                   onPressed: () {
