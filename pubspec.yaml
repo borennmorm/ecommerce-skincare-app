@@ -16,6 +16,7 @@ dependencies:
   image_picker: ^1.0.7
   get: ^4.6.6
   iconsax: ^0.0.8
+  google_sign_in: ^6.2.2
 
 dev_dependencies:
   flutter_test:

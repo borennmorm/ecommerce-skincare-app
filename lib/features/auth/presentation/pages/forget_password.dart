@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../controllers/auth_controller.dart';
 import 'register_screen.dart';
 
 class ForgetPassword extends StatelessWidget {
@@ -9,6 +9,20 @@ class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
+    final AuthController authController = Get.find<AuthController>();
+
+    void handleSubmit() {
+      if (emailController.text.trim().isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Please enter your email address',
+          snackPosition: SnackPosition.TOP,
+        );
+        return;
+      }
+      
+      authController.resetPassword(emailController.text.trim());
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -64,9 +78,7 @@ class ForgetPassword extends StatelessWidget {
                 
                 // Submit Button
                 ElevatedButton(
-                  onPressed: () {
-                    // Add your submit functionality here
-                  },
+                  onPressed: handleSubmit,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink,
                     padding: const EdgeInsets.symmetric(vertical: 16),

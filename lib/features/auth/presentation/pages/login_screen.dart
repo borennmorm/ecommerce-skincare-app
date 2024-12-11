@@ -21,15 +21,14 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isObscured = true;
 
   void login() {
-  if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-    Get.snackbar('Error', 'Email and Password cannot be empty!',
-        snackPosition: SnackPosition.BOTTOM);
-    return;
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      Get.snackbar('Error', 'Email and Password cannot be empty!',
+          snackPosition: SnackPosition.BOTTOM);
+      return;
+    }
+
+    authController.login(emailController.text, passwordController.text);
   }
-
-  authController.login(emailController.text, passwordController.text);
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +123,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {},
+                  child: Container(
+                    width: double.infinity,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.grey[200],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/google.png',
+                          width: 40,
+                          height: 40,
+                        ),
+                        const SizedBox(width: 20),
+                        const Text(
+                          'Sign In With Google',
+                          style: TextStyle(fontSize: 17),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    authController.signInWithGoogle();
+                  },
                   child: Container(
                     width: double.infinity,
                     padding:
