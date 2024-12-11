@@ -20,12 +20,12 @@ class AuthController extends GetxController {
       await userCredential.user?.updateDisplayName(username);
 
       Get.snackbar("Success", "Account created successfully!",
-          snackPosition: SnackPosition.TOP);
+          snackPosition: SnackPosition.BOTTOM);
 
       // Navigate to HomePage or LoginScreen
       Get.offAll(() => const LoginScreen());
     } catch (e) {
-      Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.TOP);
+      Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.BOTTOM);
     }
   }
 
@@ -34,9 +34,8 @@ class AuthController extends GetxController {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       Get.snackbar('Success', 'Logged in successfully!',
           snackPosition: SnackPosition.BOTTOM);
-      Get.offAll(() => MainScreen());
+      Get.offAll(() => MainScreen()); // Navigate to the Home page
     } catch (e) {
-      print(e);
       Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
     }
   }

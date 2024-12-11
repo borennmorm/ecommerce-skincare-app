@@ -85,7 +85,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 ],
                               ),
                             );
-                          }).toList(),
+                          }),
                           const Divider(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -28,12 +28,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return;
   }
 
+  // Call register method in controller
   authController.register(
     usernameController.text,
     emailController.text,
     passwordController.text,
   );
 }
+
 
   void handleGoogleSignIn() {
     authController.signInWithGoogle();

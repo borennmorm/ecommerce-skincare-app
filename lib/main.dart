@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
             .copyWith(secondary: Colors.pinkAccent),
       ),
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }

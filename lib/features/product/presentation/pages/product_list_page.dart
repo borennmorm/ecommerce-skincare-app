@@ -148,9 +148,9 @@ class _ProductListPageState extends State<ProductListPage> {
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   // Add these properties for better visual feedback
                   activeTrackColor: Colors.pink[100],
-                  thumbColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.selected)) {
+                  thumbColor: WidgetStateProperty.resolveWith<Color>(
+                    (Set<WidgetState> states) {
+                      if (states.contains(WidgetState.selected)) {
                         return Colors.pink;
                       }
                       return Colors.grey.shade400;

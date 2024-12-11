@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
             _buildHeroSection(),
             _buildCategorySection(),
             _buildFeaturedProducts(),
-            SizedBox(height: 50,),
+            const SizedBox(height: 50,),
           ],
         ),
       ),

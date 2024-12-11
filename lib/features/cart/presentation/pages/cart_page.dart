@@ -142,7 +142,7 @@ class CartPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: cartController.cartItems.isNotEmpty
-                      ? () => Get.to(() => CheckoutPage())
+                      ? () => Get.to(() => const CheckoutPage())
                       : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink,
@@ -161,7 +161,7 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 30,),
+              const SizedBox(height: 30,),
             ],
           ),
         );
