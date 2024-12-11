@@ -26,6 +26,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: Column(
           children: [
@@ -34,7 +35,7 @@ class SearchPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.pink.shade50,
                 borderRadius: const BorderRadius.vertical(
-                  bottom: Radius.circular(20),
+                  bottom: Radius.circular(12),
                 ),
               ),
               child: Column(
@@ -50,7 +51,7 @@ class SearchPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.pink.withOpacity(0.1),
@@ -143,7 +144,7 @@ class SearchPage extends StatelessWidget {
         checkmarkColor: Colors.pink,
         labelStyle: TextStyle(color: Colors.grey.shade700),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
           side: BorderSide(color: Colors.pink.shade100),
         ),
       ),

@@ -71,6 +71,8 @@ class _HomePageState extends State<HomePage> {
           
         ],
       ),
+      backgroundColor: Colors.grey[100],
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,6 +80,7 @@ class _HomePageState extends State<HomePage> {
             _buildHeroSection(),
             _buildCategorySection(),
             _buildFeaturedProducts(),
+            SizedBox(height: 50,),
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import '../../../product/presentation/pages/product_list_page.dart';
 import '../../../cart/presentation/pages/cart_page.dart';
 import '../../../cart/presentation/controllers/cart_controller.dart';
 import '../../../favorite/presentation/controllers/favorite_controller.dart';
+import '../../../settings/presentation/pages/settings_page.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -20,8 +21,8 @@ class MainScreen extends StatelessWidget {
     const HomePage(),
     const ProductListPage(),
     CartPage(),
-    FavoritePage(), 
-    const Placeholder(), 
+    FavoritePage(),
+    SettingsPage(),
   ];
 
   @override

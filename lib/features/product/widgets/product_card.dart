@@ -25,21 +25,32 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Container(
+                margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(8),
+                    top: Radius.circular(15),
                   ),
                   image: DecorationImage(
                     image: NetworkImage(image),
-                    fit: BoxFit.cover,
+                    // fit: BoxFit.cover,
                   ),
                 ),
               ),

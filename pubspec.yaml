@@ -7,14 +7,17 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
-  cloud_firestore: ^5.5.1
-  firebase: ^9.0.3
-  firebase_auth: ^5.3.4
-  firebase_core: ^3.8.1
+  cloud_firestore: 
+  firebase: 
+  firebase_auth:
+  firebase_core: 
+  firebase_storage: 
   flutter:
     sdk: flutter
   get: ^4.6.6
   iconsax: ^0.0.8
+  image_picker: ^1.0.7
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:

@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 class CartItem {
   final String name;
   final double price;
+  final String image;
 
-  CartItem(this.name, this.price);
+  CartItem(this.name, this.price, this.image);
 }
 
 class CartController extends GetxController {
@@ -12,8 +13,8 @@ class CartController extends GetxController {
 
   double get total => cartItems.fold(0, (sum, item) => sum + item.price);
 
-  void addToCart(String name, double price) {
-    cartItems.add(CartItem(name, price));
+  void addToCart(String name, double price, String image) {
+    cartItems.add(CartItem(name, price, image));
   }
 
   void removeFromCart(int index) {

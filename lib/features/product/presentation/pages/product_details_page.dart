@@ -34,6 +34,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           fontWeight: FontWeight.bold,
         ),
       ),
+      backgroundColor: Colors.grey[100],
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +150,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
                 onPressed: () {
-                  cartController.addToCart('Hydrating Serum', 24.99 * quantity);
+                  cartController.addToCart(
+                    'Hydrating Serum',
+                    24.99 * quantity,
+                    'https://www.sephora.com/productimages/sku/s2743060-main-zoom.jpg?imwidth=1224',
+                  );
                   Get.snackbar(
                     'Added to Cart',
                     'Hydrating Serum ($quantity) has been added to your cart',

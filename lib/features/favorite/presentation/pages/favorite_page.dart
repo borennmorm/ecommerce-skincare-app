@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../controllers/favorite_controller.dart';
 import '../../../product/presentation/pages/product_details_page.dart';
+import '../../../product/widgets/product_card.dart';
 
 class FavoritePage extends StatelessWidget {
-  final FavoriteController favoriteController =Get.put(FavoriteController());
+  final FavoriteController favoriteController = Get.find<FavoriteController>();
 
   FavoritePage({super.key});
 
@@ -15,6 +16,7 @@ class FavoritePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My Favorites'),
       ),
+      backgroundColor: Colors.grey[100],
       body: Obx(() {
         if (favoriteController.favoriteItems.isEmpty) {
           return Center(
@@ -58,88 +60,16 @@ class FavoritePage extends StatelessWidget {
           itemCount: favoriteController.favoriteItems.length,
           itemBuilder: (context, index) {
             final product = favoriteController.favoriteItems[index];
-            return _buildProductCard(product);
+            return ProductCard(
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              image: product.image,
+              onTap: () => Get.to(() => const ProductDetailsPage()),
+            );
           },
         );
       }),
-    );
-  }
-
-  Widget _buildProductCard(FavoriteProduct product) {
-    return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetailsPage()),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(15),
-                      ),
-                      image: DecorationImage(
-                        image: NetworkImage(product.image),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: IconButton(
-                      icon: const Icon(
-                        Iconsax.heart5,
-                        color: Colors.pink,
-                      ),
-                      onPressed: () => favoriteController.toggleFavorite(product),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '\$${product.price}',
-                    style: const TextStyle(
-                      color: Colors.pink,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 } 

@@ -13,6 +13,8 @@ class ProductListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('All Products'),
       ),
+      backgroundColor: Colors.grey[100],
+
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
