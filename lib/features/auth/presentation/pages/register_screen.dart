@@ -2,6 +2,7 @@ import 'package:ecommer_skincare_app/features/auth/presentation/controllers/auth
 import 'package:ecommer_skincare_app/features/auth/presentation/pages/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -101,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _isObscured ? Icons.visibility_off : Icons.visibility,
+                        _isObscured ? Iconsax.eye_slash : Iconsax.eye,
                         color: Colors.grey,
                       ),
                       onPressed: () {

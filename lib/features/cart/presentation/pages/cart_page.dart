@@ -2,6 +2,7 @@ import 'package:ecommer_skincare_app/features/cart/presentation/controllers/cart
 import 'package:ecommer_skincare_app/features/checkout/presentation/pages/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
  
 
 class CartPage extends StatelessWidget {
@@ -29,7 +30,7 @@ class CartPage extends StatelessWidget {
               title: Text(item.name),
               subtitle: Text('\$${item.price.toStringAsFixed(2)}'),
               trailing: IconButton(
-                icon: const Icon(Icons.remove_circle_outline),
+                icon: const Icon(Iconsax.trash),
                 onPressed: () => cartController.removeFromCart(index),
               ),
             );

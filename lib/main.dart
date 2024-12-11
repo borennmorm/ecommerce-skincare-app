@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
+import 'features/navigation/presentation/pages/main_screen.dart';
 
 
 void main() async {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
             .copyWith(secondary: Colors.pinkAccent),
       ),
-      home: LoginScreen(),
+      home: MainScreen(),
     );
   }
 }

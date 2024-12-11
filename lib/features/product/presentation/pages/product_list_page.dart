@@ -1,3 +1,4 @@
+import 'package:ecommer_skincare_app/features/product/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,44 +30,12 @@ class ProductListPage extends StatelessWidget {
   }
 
   Widget _buildProductCard() {
-    return GestureDetector(
-      onTap: () => Get.to(() => ProductDetailsPage()),
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/product.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Hydrating Serum',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    '\$24.99',
-                    style: TextStyle(color: Colors.pink),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+    return ProductCard(
+      id: 'product-${DateTime.now().millisecondsSinceEpoch}',
+      name: 'Hydrating Serum',
+      price: 24.99,
+      image: 'https://www.sephora.com/productimages/sku/s2743060-main-zoom.jpg?imwidth=1224',
+      onTap: () => Get.to(() => const ProductDetailsPage()),
     );
   }
 }

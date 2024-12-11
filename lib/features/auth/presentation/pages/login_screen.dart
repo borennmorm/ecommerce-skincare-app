@@ -1,6 +1,7 @@
 import 'package:ecommer_skincare_app/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 import 'forget_password.dart';
 import 'register_screen.dart';
@@ -86,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _isObscured ? Icons.visibility_off : Icons.visibility,
+                        _isObscured ? Iconsax.eye_slash : Iconsax.eye,
                         color: Colors.grey,
                       ),
                       onPressed: () {

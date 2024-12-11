@@ -1,6 +1,7 @@
 import 'package:ecommer_skincare_app/features/cart/presentation/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key});
@@ -117,7 +118,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             });
                           }
                         },
-                        icon: const Icon(Icons.remove, color: Colors.pink),
+                        icon: const Icon(Iconsax.minus, color: Colors.pink),
                       ),
                       // Quantity Display
                       Text(
@@ -134,7 +135,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             quantity++;
                           });
                         },
-                        icon: const Icon(Icons.add, color: Colors.pink),
+                        icon: const Icon(Iconsax.add, color: Colors.pink),
                       ),
                     ],
                   ),
