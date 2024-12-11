@@ -10,7 +10,8 @@ class AuthController extends GetxController {
 
   Future<void> register(String username, String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -24,8 +25,7 @@ class AuthController extends GetxController {
       // Navigate to HomePage or LoginScreen
       Get.offAll(() => const LoginScreen());
     } catch (e) {
-      Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.TOP);
+      Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.TOP);
     }
   }
 
@@ -36,6 +36,7 @@ class AuthController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
       Get.offAll(() => MainScreen());
     } catch (e) {
+      print(e);
       Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
     }
   }
@@ -44,19 +45,20 @@ class AuthController extends GetxController {
     try {
       await _auth.sendPasswordResetEmail(email: email);
       Get.snackbar(
-        'Success', 
+        'Success',
         'Password reset email has been sent!',
         snackPosition: SnackPosition.TOP,
       );
       Get.to(() => const LoginScreen());
     } catch (e) {
       Get.snackbar(
-        'Error', 
+        'Error',
         'Failed to send password reset email: ${e.toString()}',
         snackPosition: SnackPosition.TOP,
       );
     }
   }
+
   Future<void> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -78,8 +80,7 @@ class AuthController extends GetxController {
       Get.snackbar('Success', 'Logged in with Google',
           snackPosition: SnackPosition.BOTTOM);
     } catch (e) {
-      Get.snackbar('Error', e.toString(),
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
     }
   }
 }

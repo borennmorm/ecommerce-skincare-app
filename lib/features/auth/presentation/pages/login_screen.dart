@@ -1,4 +1,5 @@
 import 'package:ecommer_skincare_app/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -32,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

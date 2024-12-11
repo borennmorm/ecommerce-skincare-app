@@ -35,6 +35,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   );
 }
 
+  void handleGoogleSignIn() {
+    authController.signInWithGoogle();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
-                  onTap: () {
-                    // Add Google Sign-In functionality here
-                  },
+                  onTap: handleGoogleSignIn,
                   child: Container(
                     width: double.infinity,
                     padding:
