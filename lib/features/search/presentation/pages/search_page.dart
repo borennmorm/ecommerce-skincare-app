@@ -96,11 +96,11 @@ class SearchPage extends StatelessWidget {
                 slivers: [
                   const SliverToBoxAdapter(
                     child: Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
                       child: Text(
                         'Popular Products',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

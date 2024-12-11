@@ -16,166 +16,165 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Profile Section
-            Container(
-              margin: const EdgeInsets.all(16),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  // Profile Picture Section
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.grey[200],
-                    child: const Icon(
-                      Iconsax.user,
-                      size: 40,
-                      color: Colors.grey,
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Profile Section
+              Container(
+                margin: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  // Profile Info Section
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Obx(() => Text(
-                          userController.userName.value,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
-                        Obx(() => Text(
-                          userController.email.value,
-                          style: const TextStyle(
-                            color: Colors.grey,
-                          ),
-                        )),
-                        const SizedBox(height: 8),
-                        OutlinedButton(
-                          onPressed: () => Get.to(() => const EditProfilePage()),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.pink,
-                            side: const BorderSide(color: Colors.pink),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 8,
-                            ),
-                          ),
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Iconsax.edit_2, size: 16),
-                              SizedBox(width: 4),
-                              Text('Edit Profile'),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Settings Options
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  _buildSettingItem(
-                    icon: Iconsax.notification,
-                    title: 'Notifications',
-                    onTap: () => Get.to(() => NotificationSettingsPage()),
-                  ),
-                  _buildDivider(),
-                  _buildSettingItem(
-                    icon: Iconsax.global,
-                    title: 'Language',
-                    subtitle: 'English',
-                    onTap: () {
-                      _showLanguageDialog(context);
-                    },
-                  ),
-                  _buildDivider(),
-                  _buildSettingItem(
-                    icon: Iconsax.security,
-                    title: 'Privacy Policy',
-                    onTap: () => Get.to(() => const PrivacyPolicyPage()),
-                  ),
-                  _buildDivider(),
-                  _buildSettingItem(
-                    icon: Iconsax.info_circle,
-                    title: 'About',
-                    onTap: () => Get.to(() => const AboutPage()),
-                  ),
-                ],
-              ),
-            ),
-
-            // Logout Button
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.all(16),
-              child: ElevatedButton(
-                onPressed: () {
-                  _showLogoutDialog(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[100],
-                  
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: const BorderSide(color: Colors.red),
-
-                  ),
+                  ],
                 ),
-                child: const Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  children: [
+                    // Profile Picture Section
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Colors.grey[200],
+                      child: const Icon(
+                        Iconsax.user,
+                        size: 40,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    // Profile Info Section
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(() => Text(
+                            userController.userName.value,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                          Obx(() => Text(
+                            userController.email.value,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          )),
+                          const SizedBox(height: 8),
+                          OutlinedButton(
+                            onPressed: () => Get.to(() => const EditProfilePage()),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.pink,
+                              side: const BorderSide(color: Colors.pink),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Iconsax.edit_2, size: 16),
+                                SizedBox(width: 4),
+                                Text('Edit Profile'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+          
+              // Settings Options
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    _buildSettingItem(
+                      icon: Iconsax.notification,
+                      title: 'Notifications',
+                      onTap: () => Get.to(() => NotificationSettingsPage()),
+                    ),
+                    _buildDivider(),
+                    _buildSettingItem(
+                      icon: Iconsax.global,
+                      title: 'Language',
+                      subtitle: 'English',
+                      onTap: () {
+                        _showLanguageDialog(context);
+                      },
+                    ),
+                    _buildDivider(),
+                    _buildSettingItem(
+                      icon: Iconsax.security,
+                      title: 'Privacy Policy',
+                      onTap: () => Get.to(() => const PrivacyPolicyPage()),
+                    ),
+                    _buildDivider(),
+                    _buildSettingItem(
+                      icon: Iconsax.info_circle,
+                      title: 'About',
+                      onTap: () => Get.to(() => const AboutPage()),
+                    ),
+                  ],
+                ),
+              ),
+          
+              // Logout Button
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.all(16),
+                child: ElevatedButton(
+                  onPressed: () {
+                    _showLogoutDialog(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[100],
+                    
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: const BorderSide(color: Colors.red),
+          
+                    ),
+                  ),
+                  child: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

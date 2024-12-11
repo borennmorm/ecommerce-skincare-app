@@ -14,7 +14,7 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Favorites'),
+        title: const Text('My Favorites', style: TextStyle(fontSize: 18,),),
       ),
       backgroundColor: Colors.grey[100],
       body: Obx(() {

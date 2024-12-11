@@ -1,7 +1,7 @@
+import 'package:ecommer_skincare_app/features/navigation/presentation/pages/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-import '../../../home/presentation/pages/home_page.dart';
 import '../pages/login_screen.dart';
 
 class AuthController extends GetxController {
@@ -18,13 +18,13 @@ class AuthController extends GetxController {
       await userCredential.user?.updateDisplayName(username);
 
       Get.snackbar("Success", "Account created successfully!",
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
 
       // Navigate to HomePage or LoginScreen
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
     }
   }
 
@@ -33,7 +33,7 @@ class AuthController extends GetxController {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       Get.snackbar('Success', 'Logged in successfully!',
           snackPosition: SnackPosition.BOTTOM);
-      Get.offAll(() => const HomePage());
+      Get.offAll(() => MainScreen());
     } catch (e) {
       Get.snackbar('Error', e.toString(), snackPosition: SnackPosition.BOTTOM);
     }

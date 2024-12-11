@@ -143,6 +143,19 @@ class _ProductListPageState extends State<ProductListPage> {
                   value: _isOnSale.value,
                   onChanged: (value) => _isOnSale.value = value,
                   activeColor: Colors.pink,
+                  inactiveTrackColor: Colors.grey[300],
+                  inactiveThumbColor: Colors.grey[400],
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  // Add these properties for better visual feedback
+                  activeTrackColor: Colors.pink[100],
+                  thumbColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.selected)) {
+                        return Colors.pink;
+                      }
+                      return Colors.grey.shade400;
+                    },
+                  ),
                 )),
               ],
             ),
@@ -184,13 +197,35 @@ class _ProductListPageState extends State<ProductListPage> {
 
   void _applyFilters() {
     // Here you would implement the actual filtering logic
-    // For now, we'll just show what filters were selected
+    if (_selectedCategory.value == 'All' && 
+        _selectedPriceRange.value == 'All' && 
+        !_isOnSale.value) {
+      Get.snackbar(
+        'Filters Cleared',
+        'All filters have been cleared',
+        snackPosition: SnackPosition.TOP,
+      );
+      return;
+    }
+
+    String message = 'Filters Applied:\n';
+    if (_selectedCategory.value != 'All') {
+      message += '• Category: ${_selectedCategory.value}\n';
+    }
+    if (_selectedPriceRange.value != 'All') {
+      message += '• Price Range: ${_selectedPriceRange.value}\n';
+    }
+    if (_isOnSale.value) {
+      message += '• On Sale Items Only';
+    }
+
     Get.snackbar(
       'Filters Applied',
-      'Category: ${_selectedCategory.value}\n'
-      'Price Range: ${_selectedPriceRange.value}\n'
-      'On Sale: ${_isOnSale.value}',
+      message,
       snackPosition: SnackPosition.TOP,
+      duration: const Duration(seconds: 2),
+      backgroundColor: Colors.green[100],
+      colorText: Colors.green[900],
     );
   }
 
@@ -198,7 +233,7 @@ class _ProductListPageState extends State<ProductListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All Products'),
+        title: const Text('All Products', style: TextStyle(fontSize: 18,),),
         actions: [
           IconButton(
             icon: const Icon(Iconsax.search_normal),
@@ -258,10 +293,22 @@ class _ProductListPageState extends State<ProductListPage> {
                     _isOnSale.value)
                   TextButton(
                     onPressed: () {
-                      _selectedCategory.value = 'All';
-                      _selectedPriceRange.value = 'All';
-                      _isOnSale.value = false;
+                      setState(() {
+                        _selectedCategory.value = 'All';
+                        _selectedPriceRange.value = 'All';
+                        _isOnSale.value = false;
+                      });
+                      Get.snackbar(
+                        'Filters Cleared',
+                        'All filters have been cleared',
+                        snackPosition: SnackPosition.TOP,
+                        backgroundColor: Colors.blue[100],
+                        colorText: Colors.blue[900],
+                      );
                     },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.pink,
+                    ),
                     child: const Text('Clear All'),
                   ),
               ],
@@ -284,6 +331,7 @@ class _ProductListPageState extends State<ProductListPage> {
               },
             ),
           ),
+          const SizedBox(height: 20,),
         ],
       ),
     );
